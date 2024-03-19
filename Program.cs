@@ -9,24 +9,25 @@ namespace AtividadeSalario
             CalculoFuncionario funcionario = new CalculoFuncionario();
 
             Console.WriteLine("Digite o nome do Funcionário:");
-            string Nome = Console.ReadLine();
+            funcionario.Nome = Console.ReadLine();
             Console.WriteLine("Digite o Salário Bruto:");
-            double SalarioBruto = double.Parse(Console.ReadLine());
+            funcionario.salarioBruto = double.Parse(Console.ReadLine());
             Console.WriteLine("Digite o imposto:");
-            int Imposto = int.Parse(Console.ReadLine());
-            double salarioLiquido = funcionario.CalcularSalarioLiquido(Imposto, SalarioBruto);
-            Console.WriteLine($"Nome: {Nome}");
-            Console.WriteLine($"Salário Líquido: {salarioLiquido}");
+            funcionario.imposto = int.Parse(Console.ReadLine());
+
+            funcionario.salarioLiquido = funcionario.CalcularSalarioLiquido(funcionario.imposto, funcionario.salarioBruto);
+
+            Console.WriteLine($"Nome: {funcionario.Nome}");
+            Console.WriteLine($"Salário Líquido: {funcionario.salarioLiquido:C}");
 
             Console.WriteLine(new string('-', 50));
 
             Console.WriteLine("Informe a porcentagem de aumento:");
-            int aumentoPorcentagem = int.Parse(Console.ReadLine());
+            funcionario.porcentagem = double.Parse(Console.ReadLine());
+            double novoSalario = funcionario.AumentarSalario(funcionario.salarioLiquido, funcionario.porcentagem);
 
-            double aumento = SalarioBruto * aumentoPorcentagem / 100;
-            SalarioBruto += aumento;
-            salarioLiquido = funcionario.CalcularSalarioLiquido(Imposto, SalarioBruto);
-            Console.WriteLine($"Novo Salário Líquido: {salarioLiquido}");
+            Console.WriteLine($"Novo Salário Líquido: {novoSalario:C}");
         }
     }
+
 }
